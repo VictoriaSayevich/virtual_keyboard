@@ -4,7 +4,7 @@
   width: 50%;
 }
 
-.containerKeyboard {
+.container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,13 +19,13 @@
   margin: 0 auto;
 }
 
-.containerKeyboard .rowKeyboard {
+.container .row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.containerKeyboard .rowKeyboard .key {
+.container .row .key {
   width: 100%;
   font-family: "Roboto";
   font-size: 1.2rem;
@@ -34,25 +34,26 @@
   background-color: #ff9393;
   color: #313131;
   border-radius: 0 0 3px 3px;
+  border: 2px solid rgba(168, 76, 76, 0);
   padding: 20px;
   margin: 5px 5px 0 0;
   -webkit-box-shadow: 0px 2px 0px #a84c4c;
           box-shadow: 0px 2px 0px #a84c4c;
 }
 
-.containerKeyboard .rowKeyboard .key:hover {
+.container .row .key:hover {
   background: #ff7474;
 }
 
-.containerKeyboard .rowKeyboard .key.special--space {
+.container .row .key.special--space {
   padding: 0 170px;
 }
 
-.containerKeyboard .rowKeyboard .key span.en {
+.container .row .key span.en {
   display: none;
 }
 
-.containerKeyboard .rowKeyboard .key span.ru {
+.container .row .key span.ru {
   display: inline;
 }
 /*# sourceMappingURL=style.css.map */

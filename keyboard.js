@@ -49,11 +49,11 @@ const Keyboard = {
         this.elements.textarea.setAttribute('cols', '80');
         this.elements.textarea.setAttribute('rows', '20');
         document.body.appendChild(this.elements.textarea);
-        this.elements.container = this._createElement('div', 'containerKeyboard');
+        this.elements.container = this._createElement('div', 'container');
         document.body.appendChild(this.elements.container);
 
         for (let i = 0; i < this.keyboardContent.en.length; i++) {
-            const row = this._createElement('div', 'rowKeyboard');
+            const row = this._createElement('div', 'row');
             this.elements.container.appendChild(row);
             for (let j = 0; j < this.keyboardContent.en[i].length; j++) {
                 const key = this._createElement('div', 'key');
@@ -117,8 +117,8 @@ const Keyboard = {
     },
 
     _events() {
-        document.querySelector('.containerKeyboard').addEventListener('mouseover', this._hover);
-        document.querySelector('.containerKeyboard').addEventListener('click', this._click);
+        document.querySelector('.container').addEventListener('mouseover', this._hover);
+        document.querySelector('.container').addEventListener('click', this._click);
     },
 
     _toCapsLook() {
@@ -131,7 +131,7 @@ const Keyboard = {
             });
             this.properties.capsLook = false;
         } else {
-            document.querySelector('.special--capsLook').style.background = "red";
+            document.querySelector('.special--capsLook').style.background = "rgb(168, 76, 76)";
             spanKeys.forEach(key => {
                 key.style.textTransform = "uppercase";
             });
@@ -144,6 +144,7 @@ const Keyboard = {
     },
 
     _click() {
+        console.log(event.composedPath());
         const target = event.target;
         if (target.classList.value.indexOf('key') >= 0 || target.tagName === 'SPAN') {
             if (target.classList.value.indexOf('special') >= 0 || target.parentNode.classList.value.indexOf('special') >= 0) {
@@ -152,19 +153,28 @@ const Keyboard = {
                     //not a function!!!???? typeError
                     Keyboard._toCapsLook();
                 }
-                if (target.classList.value.indexOf('backspace') >= 0 || target.parentNode.classList.value.indexOf('backspace') >= 0) {
-                    Keyboard.elements.textarea.value.substring(0, Keyboard.elements.textarea.value.length - 1);;
+                if (target.classList.value.indexOf('Backspace') >= 0 || target.parentNode.classList.value.indexOf('Backspace') >= 0) {
+                    console.log('backspace');
+                    Keyboard.elements.textarea.value = Keyboard.elements.textarea.value.substring(0, Keyboard.elements.textarea.value.length - 1);;
                 }
             } else {
                 if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerText;
                 else Keyboard.elements.textarea.value += event.target.innerText;
             }
-
-        } else {
-            if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerText;
-            else Keyboard.elements.textarea.value += event.target.innerText;
         }
 
+    },
+
+    _clickMy() {
+
+        // const target = event.target;
+        if (event.target.className === 'key') {
+            event.stopPropagation();
+        }
+        const path = event.composedPath();
+        // if (path.includes())
+        console.log(path);
+        console.log(event.target);
     },
 
     _hover() {
