@@ -140,7 +140,7 @@ const Keyboard = {
     },
 
     _changeLanguage() {
-        if (!this.properties.shift && !this.properties.ctrl) return;
+        if (!this.properties.shift || !this.properties.ctrl) return;
         const ru_keys = document.querySelectorAll('span.ru');
         const en_keys = document.querySelectorAll('span.en');
         this.properties.shift = false;
@@ -176,26 +176,28 @@ const Keyboard = {
     _toCtrl() {
         const ctrl = document.querySelector('.special--Ctrl');
         if (this.properties.ctrl) {
-
+            this._changeLanguage();
             this.properties.ctrl = false;
             ctrl.style.background = 'rgb(255, 147, 147)';
         } else {
             this.properties.ctrl = true;
             ctrl.style.background = "rgb(168, 76, 76)";
+            this._changeLanguage();
         }
-        this._changeLanguage();
+
     },
 
     _toShift() {
         const ctrl = document.querySelector('.special--Shift');
         if (this.properties.shift) {
-
+            this._changeLanguage();
             this.properties.shift = false;
             ctrl.style.background = 'rgb(255, 147, 147)';
         } else {
-
             this.properties.shift = true;
             ctrl.style.background = "rgb(168, 76, 76)";
+            this._changeLanguage();
+
         }
         this._changeLanguage();
     },
