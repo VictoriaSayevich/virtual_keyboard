@@ -24,9 +24,10 @@ const Keyboard = {
     },
 
     properties: {
-        value: "",
         capsLook: false,
         shift: false,
+        ctrl: false,
+        alt: false,
         language: {
             ru: true,
             en: false
@@ -123,7 +124,6 @@ const Keyboard = {
 
     _toCapsLook() {
         const spanKeys = document.querySelectorAll('.letter');
-        console.log(spanKeys);
         if (this.properties.capsLook) {
             document.querySelector('.special--capsLook').style.background = 'rgb(255, 147, 147)';
             spanKeys.forEach(key => {
@@ -139,12 +139,69 @@ const Keyboard = {
         }
     },
 
-    _toBackspace() {
+    _changeLanguage() {
+        if (!this.properties.shift && !this.properties.ctrl) return;
+        const ru_keys = document.querySelectorAll('span.ru');
+        const en_keys = document.querySelectorAll('span.en');
+        this.properties.shift = false;
+        this.properties.ctrl = false;
+        const ctrl = document.querySelector('.special--Ctrl');
+        const shift = document.querySelector('.special--Shift');
+        shift.style.background = ctrl.style.background = 'rgb(255, 147, 147)';
+        if (this.properties.language.ru == true) {
+            [].forEach.call(ru_keys, function(elem) {
+                elem.style.display = 'none';
+            });
+            [].forEach.call(en_keys, function(elem) {
+                elem.style.display = 'inline';
+            });
+            this.properties.language.ru = false;
+            this.properties.language.en = true;
+        } else {
+            [].forEach.call(en_keys, function(elem) {
+                elem.style.display = 'none';
+            });
+            [].forEach.call(ru_keys, function(elem) {
+                elem.style.display = 'inline';
+            });
+            this.properties.language.ru = true;
+            this.properties.language.en = false;
+        }
+    },
 
+    _toBackspace() {
+        this.elements.textarea.value = this.elements.textarea.value.substring(0, this.elements.textarea.value.length - 1);;
+    },
+
+    _toCtrl() {
+        const ctrl = document.querySelector('.special--Ctrl');
+        if (this.properties.ctrl) {
+
+            this.properties.ctrl = false;
+            ctrl.style.background = 'rgb(255, 147, 147)';
+        } else {
+            this.properties.ctrl = true;
+            ctrl.style.background = "rgb(168, 76, 76)";
+        }
+        this._changeLanguage();
+    },
+
+    _toShift() {
+        const ctrl = document.querySelector('.special--Shift');
+        if (this.properties.shift) {
+
+            this.properties.shift = false;
+            ctrl.style.background = 'rgb(255, 147, 147)';
+        } else {
+
+            this.properties.shift = true;
+            ctrl.style.background = "rgb(168, 76, 76)";
+        }
+        this._changeLanguage();
     },
 
     _click() {
-        console.log(event.composedPath());
+        // console.log(event.composedPath());
         const target = event.target;
         if (target.classList.value.indexOf('key') >= 0 || target.tagName === 'SPAN') {
             if (target.classList.value.indexOf('special') >= 0 || target.parentNode.classList.value.indexOf('special') >= 0) {
@@ -154,8 +211,13 @@ const Keyboard = {
                     Keyboard._toCapsLook();
                 }
                 if (target.classList.value.indexOf('Backspace') >= 0 || target.parentNode.classList.value.indexOf('Backspace') >= 0) {
-                    console.log('backspace');
-                    Keyboard.elements.textarea.value = Keyboard.elements.textarea.value.substring(0, Keyboard.elements.textarea.value.length - 1);;
+                    Keyboard._toBackspace();
+                }
+                if (target.classList.value.indexOf('Ctrl') >= 0 || target.parentNode.classList.value.indexOf('Ctrl') >= 0) {
+                    Keyboard._toCtrl();
+                }
+                if (target.classList.value.indexOf('Shift') >= 0 || target.parentNode.classList.value.indexOf('Shift') >= 0) {
+                    Keyboard._toShift();
                 }
             } else {
                 if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerText;
