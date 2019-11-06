@@ -28,6 +28,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-shadow: 0px 10px 0px rgba(168, 76, 76, 0);
+          box-shadow: 0px 10px 0px rgba(168, 76, 76, 0);
 }
 
 .container .row .key {

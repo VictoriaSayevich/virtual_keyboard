@@ -116,6 +116,8 @@ const Keyboard = {
 
     _events() {
         document.querySelector('.container').addEventListener('mouseover', this._hover);
+        document.querySelector('.container').addEventListener('mousedown', this._keysTransformDown);
+        document.querySelector('.container').addEventListener('mouseup', this._keysTransformUp);
         document.querySelector('.container').addEventListener('click', this._click);
     },
 
@@ -199,10 +201,35 @@ const Keyboard = {
         this._changeLanguage();
     },
 
+    _keysTransformDown() {
+        const target = event.target;
+        if (target.tagName === 'SPAN') {
+            target.closest(".key").style.marginTop = "7px";
+            target.closest(".key").style.boxShadow = "none";
+        }
+        if (target.classList.value.indexOf('key') >= 0) {
+            target.style.marginTop = "7px";
+            target.style.boxShadow = "none";
+        }
+    },
+
+    _keysTransformUp() {
+        const target = event.target;
+        if (target.tagName === 'SPAN') {
+            target.closest(".key").style.marginTop = "5px";
+            target.closest(".key").style.boxShadow = "0px 2px 0px rgb(168, 76, 76)";
+        }
+        if (target.classList.value.indexOf('key') >= 0) {
+            target.style.marginTop = "5px";
+            target.style.boxShadow = "0px 2px 0px rgb(168, 76, 76)";
+        }
+    },
+
     _click() {
         // console.log(event.composedPath());
         const target = event.target;
         if (target.classList.value.indexOf('key') >= 0 || target.tagName === 'SPAN') {
+
             if (target.classList.value.indexOf('special') >= 0 || target.parentNode.classList.value.indexOf('special') >= 0) {
                 const spanKeys = document.querySelectorAll('span');
                 if (target.classList.value.indexOf('capsLook') >= 0 || target.parentNode.classList.value.indexOf('capsLook') >= 0) {
