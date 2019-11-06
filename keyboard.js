@@ -12,14 +12,14 @@ const Keyboard = {
             ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
             ['CapsLk', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', ',', 'Enter'],
             ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '/', '▲', 'Shift'],
-            ['Ctrl', 'Win', 'Alt', 'Space', 'Alt', '◄', '▼', '►']
+            ['Ctrl', 'Win', 'Alt', '\u00A0', 'Alt', '◄', '▼', '►']
         ],
         en: [
             ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+', 'Backspace'],
             ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{', '}'],
             ['CapsLk', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '"', 'Enter'],
             ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'],
-            ['Ctrl', 'Win', 'Alt', 'Space', 'Alt', '◄', '▼', '►']
+            ['Ctrl', 'Win', 'Alt', '\u00A0', 'Alt', '◄', '▼', '►']
         ]
     },
 
@@ -52,9 +52,6 @@ const Keyboard = {
         this.elements.container = this._createElement('div', 'containerKeyboard');
         document.body.appendChild(this.elements.container);
 
-        const createIcon = (iconName) => {
-            return `<i class="${iconName}"></i>`;
-        };
         for (let i = 0; i < this.keyboardContent.en.length; i++) {
             const row = this._createElement('div', 'rowKeyboard');
             this.elements.container.appendChild(row);
@@ -73,21 +70,17 @@ const Keyboard = {
                         break;
                     case '◄':
                         key.classList.add("special--arrow_left");
-                        // text_ru = text_en = createIcon("fas fa-caret-square-left");
                         break;
                     case "▼":
                         key.classList.add("special--arrow_down");
-                        // text_ru = text_en = createIcon("fas fa-caret-square-down");
                         break;
                     case "►":
                         key.classList.add("special--arrow_right");
-                        // text_ru = text_en = createIcon("fas fa-caret-square-right");
                         break;
                     case "▲":
                         key.classList.add("special--arrow_up");
-                        // text_ru = text_en = createIcon("fas fa-caret-square-up");
                         break;
-                    case "Space":
+                    case "\u00A0":
                         key.classList.add("special--space");
                         break;
                     case "Enter":
@@ -160,16 +153,16 @@ const Keyboard = {
                     Keyboard._toCapsLook();
                 }
                 if (target.classList.value.indexOf('backspace') >= 0 || target.parentNode.classList.value.indexOf('backspace') >= 0) {
-                    textarea.value = textarea.value.substring(0, textarea.values.length - 1);;
+                    Keyboard.elements.textarea.value.substring(0, Keyboard.elements.textarea.value.length - 1);;
                 }
             } else {
-                if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerHTML;
-                else Keyboard.elements.textarea.value += event.target.innerHTML;
+                if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerText;
+                else Keyboard.elements.textarea.value += event.target.innerText;
             }
 
         } else {
-            if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerHTML;
-            else Keyboard.elements.textarea.value += event.target.innerHTML;
+            if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerText;
+            else Keyboard.elements.textarea.value += event.target.innerText;
         }
 
     },
