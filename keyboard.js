@@ -17,7 +17,7 @@ const Keyboard = {
         en: [
             ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+', 'Backspace'],
             ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{', '}'],
-            ['CapsLk', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '"', 'Enter'],
+            ['CapsLk', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '"', '?', 'Enter'],
             ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'],
             ['Ctrl', 'Win', 'Alt', '\u00A0', 'Alt', '◄', '▼', '►']
         ]
@@ -82,10 +82,10 @@ const Keyboard = {
                         key.classList.add("special--arrow_up");
                         break;
                     case "\u00A0":
-                        key.classList.add("special--space");
+                        key.classList.add("special--Space");
                         break;
                     case "Enter":
-                        key.classList.add("special--enter");
+                        key.classList.add("special--Enter");
                         break;
                     case "Alt":
                         key.classList.add("special--Alt");
@@ -101,9 +101,6 @@ const Keyboard = {
                         break;
                     case "Win":
                         key.classList.add("special--Win");
-                        break;
-                    case "Shift":
-                        key.classList.add("special--Shift");
                         break;
                     default:
                         key.classList.add("letter");
@@ -170,7 +167,7 @@ const Keyboard = {
     },
 
     _toBackspace() {
-        this.elements.textarea.value = this.elements.textarea.value.substring(0, this.elements.textarea.value.length - 1);;
+        this.elements.textarea.value = this.elements.textarea.value.substring(0, this.elements.textarea.value.length - 1);
     },
 
     _toCtrl() {
@@ -220,6 +217,12 @@ const Keyboard = {
                 }
                 if (target.classList.value.indexOf('Shift') >= 0 || target.parentNode.classList.value.indexOf('Shift') >= 0) {
                     Keyboard._toShift();
+                }
+                if (target.classList.value.indexOf('Enter') >= 0 || target.parentNode.classList.value.indexOf('Enter') >= 0) {
+                    Keyboard.elements.textarea.value += '\n';
+                }
+                if (target.classList.value.indexOf('Space') >= 0 || target.parentNode.classList.value.indexOf('Space') >= 0) {
+                    Keyboard.elements.textarea.value += '\u00A0';
                 }
             } else {
                 if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerText;
