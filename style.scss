@@ -7,7 +7,7 @@ $font_family: 'Roboto';
     display: flex;
     margin: 0 auto;
     margin-bottom: 50px;
-    width: 50%;
+    width: 60%;
     font-size: 1.2rem;
 }
 
@@ -15,7 +15,7 @@ $font_family: 'Roboto';
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
     .row {
         display: flex;
@@ -35,8 +35,11 @@ $font_family: 'Roboto';
             &:hover {
                 background: darken($color_key, 6%);
             }
-            &.special--space {
-                padding: 0 170px;
+            &.special--Space {
+                padding: 0 200px;
+            }
+            &.special--Shift {
+                padding: 20px 30px;
             }
             span {
                 &.en {

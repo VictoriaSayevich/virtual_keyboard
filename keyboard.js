@@ -64,7 +64,7 @@ const Keyboard = {
                 const span_en = this._createElement('span', 'en');
                 switch (this.keyboardContent.en[i][j]) {
                     case "Tab":
-                        key.classList.add('special--tab');
+                        key.classList.add('special--Tab');
                         break;
                     case "CapsLk":
                         key.classList.add('special--capsLook');
@@ -223,6 +223,9 @@ const Keyboard = {
                 }
                 if (target.classList.value.indexOf('Space') >= 0 || target.parentNode.classList.value.indexOf('Space') >= 0) {
                     Keyboard.elements.textarea.value += '\u00A0';
+                }
+                if (target.classList.value.indexOf('Tab') >= 0 || target.parentNode.classList.value.indexOf('Tab') >= 0) {
+                    Keyboard.elements.textarea.value += '\t\t';
                 }
             } else {
                 if (event.target.className === 'key') Keyboard.elements.textarea.value += event.target.lastChild.innerText;
