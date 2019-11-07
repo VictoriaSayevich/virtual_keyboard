@@ -41,7 +41,6 @@ const Keyboard = {
     },
 
     _main() {
-        console.log('localStorage.getItem', localStorage.getItem('lang'))
         if (localStorage.getItem('lang') === 'en') {
             this.properties.language.en = true;
             this.properties.language.ru = false;
@@ -50,8 +49,6 @@ const Keyboard = {
             this.properties.language.ru = true;
             this.properties.language.en = false;
         }
-        console.log('this.properties.language.en', this.properties.language.en);
-        console.log('this.properties.language.ru', this.properties.language.ru);
         this._createKeyboard();
         this._events();
 
@@ -131,10 +128,16 @@ const Keyboard = {
         const spans = document.querySelectorAll('SPAN');
         [].forEach.call(spans, el => {
             if (event.key == el.innerHTML) {
-                el.closest(".key").style.marginTop = "4px";
-                el.closest(".key").style.boxShadow = "0px 2px 0px rgb(168, 76, 76)";
+                // el.closest(".key").style.marginTop = "4px";
+                // el.closest(".key").style.boxShadow = "0px 2px 0px rgba(168, 76, 76, 0)";
+                // // el.closest(".key").style.background = 'red';
+                // // console.log(el.closest(".key"))
+                el.closest(".key").style.marginTop = "6px";
+                el.closest(".key").style.boxShadow = "none";
+                el.closest(".key").style.borderBottom = "none";
             }
         });
+
     },
 
     _keyUpHandler() {
@@ -143,6 +146,7 @@ const Keyboard = {
             if (event.key == el.innerHTML) {
                 el.closest(".key").style.marginTop = "4px";
                 el.closest(".key").style.boxShadow = "0px 2px 0px rgb(168, 76, 76)";
+                el.closest(".key").style.borderBottom = "none";
             }
         });
 
@@ -317,14 +321,10 @@ const Keyboard = {
 
     _clickMy() {
 
-        // const target = event.target;
         if (event.target.className === 'key') {
             event.stopPropagation();
         }
         const path = event.composedPath();
-        // if (path.includes())
-        console.log(path);
-        console.log(event.target);
     },
 
     _hover() {

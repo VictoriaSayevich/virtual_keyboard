@@ -17,9 +17,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 60%;
   margin: 0 auto;
   position: relative;
@@ -47,7 +47,7 @@
   color: #313131;
   border-radius: 0 0 3px 3px;
   border: 2px solid rgba(168, 76, 76, 0);
-  padding: 2%;
+  padding: 20px;
   margin: 5px 5px 0 0;
   -webkit-box-shadow: 0px 2px 0px #a84c4c;
           box-shadow: 0px 2px 0px #a84c4c;
@@ -59,11 +59,11 @@
 }
 
 .container .row .key.special--Space {
-  padding: 0 20%;
+  padding: 0 170px;
 }
 
 .container .row .key.special--Shift {
-  padding: 2% 2.5%;
+  padding: 20px 30px;
 }
 
 .container .row .key span.en {
