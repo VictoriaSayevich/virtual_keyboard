@@ -17,9 +17,12 @@ $font_family: 'Roboto';
     justify-content: flex-start;
     width: 60%;
     margin: 0 auto;
+    position: relative;
     .row {
         display: flex;
+        justify-content: space-between;
         box-shadow: 0px 10px 0px rgba(168, 76, 76, 0);
+        border-bottom: none;
         .key {
             width: 100%;
             font-family: $font_family;
@@ -30,24 +33,27 @@ $font_family: 'Roboto';
             color: $color_text_key;
             border-radius: 0 0 3px 3px;
             border: 2px solid rgba(168, 76, 76, 0);
-            padding: 20px;
+            padding: 2%;
             margin: 5px 5px 0 0;
             box-shadow: 0px 2px 0px rgb(168, 76, 76);
+            border-bottom: none;
             &:hover {
                 background: darken($color_key, 6%);
             }
             &.special--Space {
-                padding: 0 200px;
+                padding: 0 20%;
             }
             &.special--Shift {
-                padding: 20px 30px;
+                padding: 2% 2.5%;
             }
             span {
                 &.en {
                     display: none;
+                    border-bottom: none;
                 }
                 &.ru {
                     display: inline;
+                    border-bottom: none;
                 }
             }
         }

@@ -22,14 +22,19 @@
           justify-content: flex-start;
   width: 60%;
   margin: 0 auto;
+  position: relative;
 }
 
 .container .row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-shadow: 0px 10px 0px rgba(168, 76, 76, 0);
           box-shadow: 0px 10px 0px rgba(168, 76, 76, 0);
+  border-bottom: none;
 }
 
 .container .row .key {
@@ -42,10 +47,11 @@
   color: #313131;
   border-radius: 0 0 3px 3px;
   border: 2px solid rgba(168, 76, 76, 0);
-  padding: 20px;
+  padding: 2%;
   margin: 5px 5px 0 0;
   -webkit-box-shadow: 0px 2px 0px #a84c4c;
           box-shadow: 0px 2px 0px #a84c4c;
+  border-bottom: none;
 }
 
 .container .row .key:hover {
@@ -53,18 +59,20 @@
 }
 
 .container .row .key.special--Space {
-  padding: 0 200px;
+  padding: 0 20%;
 }
 
 .container .row .key.special--Shift {
-  padding: 20px 30px;
+  padding: 2% 2.5%;
 }
 
 .container .row .key span.en {
   display: none;
+  border-bottom: none;
 }
 
 .container .row .key span.ru {
   display: inline;
+  border-bottom: none;
 }
 /*# sourceMappingURL=style.css.map */

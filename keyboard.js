@@ -41,14 +41,26 @@ const Keyboard = {
     },
 
     _main() {
+        console.log('localStorage.getItem', localStorage.getItem('lang'))
+        if (localStorage.getItem('lang') === 'en') {
+            this.properties.language.en = true;
+            this.properties.language.ru = false;
+        }
+        if (localStorage.getItem('lang') === 'ru') {
+            this.properties.language.ru = true;
+            this.properties.language.en = false;
+        }
+        console.log('this.properties.language.en', this.properties.language.en);
+        console.log('this.properties.language.ru', this.properties.language.ru);
         this._createKeyboard();
         this._events();
+
     },
 
     _createKeyboard() {
         this.elements.textarea = this._createElement('textarea', 'result');
-        this.elements.textarea.setAttribute('cols', '80');
-        this.elements.textarea.setAttribute('rows', '20');
+        // this.elements.textarea.setAttribute('cols', '50');
+        this.elements.textarea.setAttribute('rows', '12');
         document.body.appendChild(this.elements.textarea);
         this.elements.container = this._createElement('div', 'container');
         document.body.appendChild(this.elements.container);
@@ -109,8 +121,31 @@ const Keyboard = {
                 row.appendChild(key);
                 (key.appendChild(span_ru)).appendChild(document.createTextNode(text_ru));
                 (key.appendChild(span_en)).appendChild(document.createTextNode(text_en));
+
             }
         }
+        this._changeRuEn();
+    },
+
+    _keyDownHandler() {
+        const spans = document.querySelectorAll('SPAN');
+        [].forEach.call(spans, el => {
+            if (event.key == el.innerHTML) {
+                el.closest(".key").style.marginTop = "4px";
+                el.closest(".key").style.boxShadow = "0px 2px 0px rgb(168, 76, 76)";
+            }
+        });
+    },
+
+    _keyUpHandler() {
+        const spans = document.querySelectorAll('SPAN');
+        [].forEach.call(spans, el => {
+            if (event.key == el.innerHTML) {
+                el.closest(".key").style.marginTop = "4px";
+                el.closest(".key").style.boxShadow = "0px 2px 0px rgb(168, 76, 76)";
+            }
+        });
+
 
     },
 
@@ -118,7 +153,11 @@ const Keyboard = {
         document.querySelector('.container').addEventListener('mouseover', this._hover);
         document.querySelector('.container').addEventListener('mousedown', this._keysTransformDown);
         document.querySelector('.container').addEventListener('mouseup', this._keysTransformUp);
+        document.addEventListener('keydown', this._keyDownHandler);
+        document.addEventListener('keyup', this._keyUpHandler);
         document.querySelector('.container').addEventListener('click', this._click);
+        // document.addEventListener('keydown', console.log(event.code));
+
     },
 
     _toCapsLook() {
@@ -138,15 +177,10 @@ const Keyboard = {
         }
     },
 
-    _changeLanguage() {
-        if (!this.properties.shift || !this.properties.ctrl) return;
+
+    _changeRuEn() {
         const ru_keys = document.querySelectorAll('span.ru');
         const en_keys = document.querySelectorAll('span.en');
-        this.properties.shift = false;
-        this.properties.ctrl = false;
-        const ctrl = document.querySelector('.special--Ctrl');
-        const shift = document.querySelector('.special--Shift');
-        shift.style.background = ctrl.style.background = 'rgb(255, 147, 147)';
         if (this.properties.language.ru == true) {
             [].forEach.call(ru_keys, function(elem) {
                 elem.style.display = 'none';
@@ -154,8 +188,7 @@ const Keyboard = {
             [].forEach.call(en_keys, function(elem) {
                 elem.style.display = 'inline';
             });
-            this.properties.language.ru = false;
-            this.properties.language.en = true;
+            localStorage.setItem('lang', 'ru');
         } else {
             [].forEach.call(en_keys, function(elem) {
                 elem.style.display = 'none';
@@ -163,6 +196,22 @@ const Keyboard = {
             [].forEach.call(ru_keys, function(elem) {
                 elem.style.display = 'inline';
             });
+            localStorage.setItem('lang', 'en');
+        }
+    },
+
+    _changeLanguage() {
+        if (!this.properties.shift || !this.properties.ctrl) return;
+        this.properties.shift = false;
+        this.properties.ctrl = false;
+        this._changeRuEn();
+        const ctrl = document.querySelector('.special--Ctrl');
+        const shift = document.querySelector('.special--Shift');
+        shift.style.background = ctrl.style.background = 'rgb(255, 147, 147)';
+        if (this.properties.language.ru == true) {
+            this.properties.language.ru = false;
+            this.properties.language.en = true;
+        } else {
             this.properties.language.ru = true;
             this.properties.language.en = false;
         }
@@ -204,24 +253,28 @@ const Keyboard = {
     _keysTransformDown() {
         const target = event.target;
         if (target.tagName === 'SPAN') {
-            target.closest(".key").style.marginTop = "7px";
+            target.closest(".key").style.marginTop = "6px";
             target.closest(".key").style.boxShadow = "none";
+            target.closest(".key").style.borderBottom = "none";
         }
         if (target.classList.value.indexOf('key') >= 0) {
-            target.style.marginTop = "7px";
+            target.style.marginTop = "6px";
             target.style.boxShadow = "none";
+            target.style.borderBottom = "none";
         }
     },
 
     _keysTransformUp() {
         const target = event.target;
         if (target.tagName === 'SPAN') {
-            target.closest(".key").style.marginTop = "5px";
+            target.closest(".key").style.marginTop = "4px";
             target.closest(".key").style.boxShadow = "0px 2px 0px rgb(168, 76, 76)";
+            target.closest(".key").style.borderBottom = "none";
         }
         if (target.classList.value.indexOf('key') >= 0) {
-            target.style.marginTop = "5px";
+            target.style.marginTop = "4px";
             target.style.boxShadow = "0px 2px 0px rgb(168, 76, 76)";
+            target.style.borderBottom = "none";
         }
     },
 
