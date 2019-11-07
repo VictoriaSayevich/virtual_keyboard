@@ -288,7 +288,6 @@ const Keyboard = {
         if (target.classList.value.indexOf('key') >= 0 || target.tagName === 'SPAN') {
 
             if (target.classList.value.indexOf('special') >= 0 || target.parentNode.classList.value.indexOf('special') >= 0) {
-                const spanKeys = document.querySelectorAll('span');
                 if (target.classList.value.indexOf('capsLook') >= 0 || target.parentNode.classList.value.indexOf('capsLook') >= 0) {
                     //not a function!!!???? typeError
                     Keyboard._toCapsLook();
@@ -317,14 +316,6 @@ const Keyboard = {
             }
         }
 
-    },
-
-    _clickMy() {
-
-        if (event.target.className === 'key') {
-            event.stopPropagation();
-        }
-        const path = event.composedPath();
     },
 
     _hover() {
