@@ -1,1 +1,1 @@
-# https://VictoriaSayevich.github.io/virtual_keyboard
+# https://VictoriaSayevich/virtual_keyboard
