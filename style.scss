@@ -1,0 +1,61 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+$color_key: rgb(255, 147, 147);
+$color_text_key: rgb(49, 49, 49);
+$font_family: 'Roboto';
+////////////////////
+.result {
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    width: 60%;
+    font-size: 1.2rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    margin: 0 auto;
+    position: relative;
+    .row {
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 0px 10px 0px rgba(168, 76, 76, 0);
+        border-bottom: none;
+        .key {
+            width: 100%;
+            font-family: $font_family;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            background-color: $color_key;
+            color: $color_text_key;
+            border-radius: 0 0 3px 3px;
+            border: 2px solid rgba(168, 76, 76, 0);
+            padding: 20px;
+            margin: 5px 5px 0 0;
+            box-shadow: 0px 2px 0px rgb(168, 76, 76);
+            border-bottom: none;
+            &:hover {
+                background: darken($color_key, 6%);
+            }
+            &.special--Space {
+                padding: 0 170px;
+            }
+            &.special--Shift {
+                padding: 20px 30px;
+            }
+            span {
+                &.en {
+                    display: none;
+                    border-bottom: none;
+                }
+                &.ru {
+                    display: inline;
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
